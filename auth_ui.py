@@ -136,7 +136,7 @@ def render_auth_gate() -> bool:
         with st.container(border=True):
             view = st.radio(
                 "Account access",
-                ["Sign in", "Sign up", "Forgot password"],
+                ["Sign in", "Sign up"],
                 horizontal=True,
                 label_visibility="collapsed",
                 key="nm_auth_view",
@@ -227,39 +227,6 @@ def render_auth_gate() -> bool:
                                 st.session_state["nm_authenticated"] = True
                                 st.session_state["nm_email"] = account["email"]
                                 st.rerun()
-                            else:
-                                st.error(_firebase_error(response))
-                        except requests.RequestException:
-                            st.error("Could not reach the authentication service. Try again.")
-
-            else:
-                st.markdown('<div class="nm-form-title">Reset your password</div>', unsafe_allow_html=True)
-                st.markdown(
-                    '<div class="nm-form-copy">We will send a password reset '
-                    "link to your email address.</div>",
-                    unsafe_allow_html=True,
-                )
-                with st.form("nm_forgot_password", clear_on_submit=True):
-                    email = st.text_input("Email address", autocomplete="email")
-                    submitted = st.form_submit_button(
-                        "Send reset link", type="primary", use_container_width=True
-                    )
-
-                if submitted:
-                    if not firebase_api_key:
-                        st.error("Authentication is not configured. Add firebase_api_key to Streamlit secrets.")
-                    elif not email:
-                        st.error("Enter the email address for your account.")
-                    else:
-                        try:
-                            response = requests.post(
-                                "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode",
-                                params={"key": firebase_api_key},
-                                json={"requestType": "PASSWORD_RESET", "email": email},
-                                timeout=15,
-                            )
-                            if response.ok:
-                                st.success("If an account exists for that address, a reset email has been sent.")
                             else:
                                 st.error(_firebase_error(response))
                         except requests.RequestException:
