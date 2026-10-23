@@ -6,6 +6,7 @@ import streamlit as st
 import joblib
 
 from agent_workflow import PredictMedWorkflow
+from auth_ui import render_auth_gate
 
 
 DATA_PATH = Path("data/processed_patients.csv")
@@ -29,10 +30,13 @@ FEATURES = [
 
 
 st.set_page_config(
-    page_title="PredictMed",
-    page_icon="🩺",
+    page_title="NeuroMedix",
+    page_icon="N",
     layout="wide",
 )
+
+if not render_auth_gate():
+    st.stop()
 
 
 @st.cache_data
@@ -56,10 +60,15 @@ def load_metrics():
         return json.load(file)
 
 
-st.title("PredictMed")
+st.title("NeuroMedix")
 st.subheader(
     "Agentic AI for Chronic Kidney Disease Deterioration Monitoring"
 )
+
+if st.button("Sign out"):
+    st.session_state.pop("nm_authenticated", None)
+    st.session_state.pop("nm_email", None)
+    st.rerun()
 
 st.warning(
     "Research prototype only. This system is not clinically validated "
