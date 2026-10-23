@@ -83,15 +83,19 @@ st.markdown(
     [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] * {
         color:var(--muted) !important;
     }
-    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
-        min-height:44px; border-color:var(--line) !important; border-radius:5px;
+    [data-testid="stSelectbox"] [role="group"] {
+        min-height:44px; border:1px solid var(--line) !important; border-radius:5px;
         background:#fff !important; color:var(--ink) !important;
     }
-    [data-testid="stSelectbox"] input,
-    [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p {
-        color:var(--ink) !important;
+    [data-testid="stSelectbox"] input {
+        background:transparent !important; color:var(--ink) !important;
+        -webkit-text-fill-color:var(--ink) !important;
     }
-    [data-testid="stSelectbox"] svg { fill:var(--muted) !important; }
+    [data-testid="stSelectbox"] input::placeholder { color:#71817c !important; }
+    [data-testid="stSelectbox"] button {
+        background:#fff !important; color:var(--muted) !important;
+    }
+    [data-testid="stSelectbox"] button svg { fill:var(--muted) !important; }
     div[data-testid="stVerticalBlockBorderWrapper"] { border-color:var(--line); border-radius:6px; }
     div[data-testid="stDataFrame"] { width:100%; border:1px solid var(--line); border-radius:6px; background:#fff; }
     div[data-testid="stDataFrame"] iframe { background:#fff; }
