@@ -3,9 +3,6 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-import joblib
-
-from agent_workflow import PredictMedWorkflow
 
 
 DATA_PATH = Path("data/processed_patients.csv")
@@ -82,7 +79,6 @@ if not all(path.exists() for path in required_files):
 data = load_patient_data()
 followup = load_followup_data()
 metrics = load_metrics()
-model = joblib.load(MODEL_PATH)
 
 st.header("Population Overview")
 
@@ -177,6 +173,8 @@ st.header("Agentic AI Workflow")
 
 if st.button("Run PredictMed analysis", type="primary"):
     try:
+        from agent_workflow import PredictMedWorkflow
+
         workflow = PredictMedWorkflow()
         result = workflow.run(patient)
 
