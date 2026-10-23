@@ -79,8 +79,22 @@ st.markdown(
     label[data-testid="stMetricLabel"], label[data-testid="stMetricLabel"] *,
     div[data-testid="stMetricLabel"], div[data-testid="stMetricLabel"] p { color:var(--muted) !important; font-size:12px; }
     div[data-testid="stMetricValue"], div[data-testid="stMetricValue"] div { color:var(--ink) !important; font:600 27px 'DM Sans', sans-serif; }
+    [data-testid="stWidgetLabel"], [data-testid="stWidgetLabel"] *,
+    [data-testid="stCaptionContainer"], [data-testid="stCaptionContainer"] * {
+        color:var(--muted) !important;
+    }
+    [data-testid="stSelectbox"] [data-baseweb="select"] > div {
+        min-height:44px; border-color:var(--line) !important; border-radius:5px;
+        background:#fff !important; color:var(--ink) !important;
+    }
+    [data-testid="stSelectbox"] input,
+    [data-testid="stSelectbox"] [data-testid="stMarkdownContainer"] p {
+        color:var(--ink) !important;
+    }
+    [data-testid="stSelectbox"] svg { fill:var(--muted) !important; }
     div[data-testid="stVerticalBlockBorderWrapper"] { border-color:var(--line); border-radius:6px; }
-    div[data-testid="stDataFrame"] { border:1px solid var(--line); border-radius:6px; }
+    div[data-testid="stDataFrame"] { width:100%; border:1px solid var(--line); border-radius:6px; background:#fff; }
+    div[data-testid="stDataFrame"] iframe { background:#fff; }
     .stButton button[kind="primary"] { border-radius:5px; background:var(--green); border-color:var(--green); }
     .nm-footnote { margin-top:14px; color:#71817c; font-size:12px; }
     @media (max-width: 720px) {
